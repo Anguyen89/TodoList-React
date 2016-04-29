@@ -8,5 +8,5 @@
 
 
 10.times do
-  Todo.create!(title: Faker::Name.name, body: Faker::Address.street_name, done: false)
+  Todo.create!(title: Faker::Name.name, body: Faker::Lorem.sentences, done: false)
 end

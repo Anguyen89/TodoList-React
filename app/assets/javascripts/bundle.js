@@ -258,6 +258,8 @@
 
 	var React = __webpack_require__(5);
 	var TodoStore = __webpack_require__(3);
+	var TodoListItem = __webpack_require__(169);
+	var TodoForm = __webpack_require__(170);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
@@ -282,11 +284,7 @@
 	
 	  render: function () {
 	    var todoList = this.state.todos.map(function (todo, idx) {
-	      return React.createElement(
-	        'li',
-	        { id: todo.id },
-	        todo.title
-	      );
+	      return React.createElement(TodoListItem, { id: todo.id, title: todo.title, body: todo.body });
 	    });
 	    return React.createElement(
 	      'div',
@@ -295,7 +293,8 @@
 	        'ul',
 	        null,
 	        todoList
-	      )
+	      ),
+	      React.createElement(TodoForm, null)
 	    );
 	  }
 	
@@ -20158,6 +20157,90 @@
 	var ReactMount = __webpack_require__(159);
 	
 	module.exports = ReactMount.renderSubtreeIntoContainer;
+
+/***/ },
+/* 169 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(5);
+	
+	module.exports = React.createClass({
+	  displayName: 'exports',
+	
+	
+	  render: function () {
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.title
+	      ),
+	      React.createElement(
+	        'p',
+	        null,
+	        this.props.body
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 170 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(5);
+	var TodoList = __webpack_require__(4);
+	var TodoStore = __webpack_require__(3);
+	
+	module.exports = React.createClass({
+	  displayName: 'exports',
+	
+	
+	  getInitialState: function () {
+	    return { title: "", body: "" };
+	  },
+	
+	  updateTitle: function (event) {
+	    this.setState({ title: event.currentTarget.value });
+	  },
+	
+	  updateBody: function (event) {
+	    this.setState({ body: event.currentTarget.value });
+	  },
+	
+	  handleSubmit: function (event) {
+	    event.preventDefault();
+	    TodoStore.create(this.state);
+	    this.resetState();
+	  },
+	
+	  resetState: function () {
+	    this.setState({ title: "", body: "" });
+	  },
+	
+	  render: function () {
+	    return React.createElement(
+	      'form',
+	      { onSubmit: this.handleSubmit },
+	      React.createElement(
+	        'label',
+	        null,
+	        'Title',
+	        React.createElement('input', { type: 'text', onChange: this.updateTitle, value: this.state.title })
+	      ),
+	      React.createElement('br', null),
+	      React.createElement(
+	        'label',
+	        null,
+	        'Body',
+	        React.createElement('input', { type: 'text', onChange: this.updateBody, value: this.state.body })
+	      ),
+	      React.createElement('input', { type: 'submit', value: 'Create New Todo Item' })
+	    );
+	  }
+	});
 
 /***/ }
 /******/ ]);
