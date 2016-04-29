@@ -197,6 +197,7 @@
 	    $.ajax({
 	      url: '/api/todos',
 	      method: 'POST',
+	      data: { todo: todo },
 	      success: function (data) {
 	        console.log("Todo Created");
 	        _todos.push(data);
@@ -284,7 +285,7 @@
 	
 	  render: function () {
 	    var todoList = this.state.todos.map(function (todo, idx) {
-	      return React.createElement(TodoListItem, { id: todo.id, title: todo.title, body: todo.body });
+	      return React.createElement(TodoListItem, { id: todo.id, title: todo.title, body: todo.body, done: todo.done });
 	    });
 	    return React.createElement(
 	      'div',
@@ -20163,10 +20164,16 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(5);
+	var TodoStore = __webpack_require__(3);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
 	
+	
+	  handleDestroy: function (event) {
+	    event.preventDefault();
+	    TodoStore.destroy(this.props.id);
+	  },
 	
 	  render: function () {
 	    return React.createElement(
@@ -20175,13 +20182,11 @@
 	      React.createElement(
 	        'p',
 	        null,
-	        this.props.title
-	      ),
-	      React.createElement(
-	        'p',
-	        null,
+	        this.props.title,
+	        React.createElement('br', null),
 	        this.props.body
-	      )
+	      ),
+	      React.createElement('input', { type: 'button', onClick: this.handleDestroy, value: 'Delete' })
 	    );
 	  }
 	});

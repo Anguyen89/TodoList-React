@@ -3,7 +3,7 @@ class CreateTodos < ActiveRecord::Migration
     create_table :todos do |t|
       t.string :title, null: false
       t.text :body, null: false
-      t.boolean :done, inclusion: {in: [true, false]}
+      t.boolean :done, inclusion: {in: [true, false]}, default: false
 
       t.timestamps null: false
     end

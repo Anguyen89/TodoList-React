@@ -24,7 +24,7 @@ module.exports = React.createClass({
 
   render: function(){
     var todoList = this.state.todos.map(function(todo, idx){
-      return <TodoListItem id={todo.id} title={todo.title} body={todo.body}/>;
+      return <TodoListItem id={todo.id} title={todo.title} body={todo.body} done={todo.done}/>;
     });
     return (
       <div>

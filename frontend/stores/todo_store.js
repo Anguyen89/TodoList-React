@@ -41,6 +41,7 @@ var TodoStore = {
     $.ajax({
       url: '/api/todos',
       method: 'POST',
+      data: {todo: todo},
       success: function(data){
         console.log("Todo Created");
         _todos.push(data);
