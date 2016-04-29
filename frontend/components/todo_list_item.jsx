@@ -11,7 +11,7 @@ module.exports = React.createClass({
   render: function(){
     return (
       <div>
-        <p>{this.props.title}<br/>{this.props.body}</p>
+        <div>{this.props.title}<br/>{this.props.body}</div>
         <input type="button" onClick={this.handleDestroy} value="Delete" />
       </div>
     );

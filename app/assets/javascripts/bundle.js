@@ -223,7 +223,9 @@
 	        method: 'DELETE',
 	        success: function (data) {
 	          console.log(data);
-	          delete _todos[id];
+	          _todos = _todos.filter(function (el) {
+	            return el.id !== id;
+	          });
 	          self.changed();
 	        }
 	      });
@@ -290,6 +292,11 @@
 	    return React.createElement(
 	      'div',
 	      null,
+	      React.createElement(
+	        'h1',
+	        null,
+	        'Todo List'
+	      ),
 	      React.createElement(
 	        'ul',
 	        null,
@@ -20180,7 +20187,7 @@
 	      'div',
 	      null,
 	      React.createElement(
-	        'p',
+	        'div',
 	        null,
 	        this.props.title,
 	        React.createElement('br', null),

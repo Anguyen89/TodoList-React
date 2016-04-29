@@ -28,6 +28,7 @@ module.exports = React.createClass({
     });
     return (
       <div>
+        <h1>Todo List</h1>
           <ul>
             {todoList}
           </ul>

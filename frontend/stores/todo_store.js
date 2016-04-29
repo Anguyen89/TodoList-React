@@ -67,7 +67,9 @@ var TodoStore = {
         method: 'DELETE',
         success: function(data){
           console.log(data);
-          delete _todos[id];
+          _todos = _todos.filter(function(el){
+            return el.id !== id;
+          });
           self.changed();
         }
       });
